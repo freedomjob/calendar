@@ -17,6 +17,6 @@ export default {
 <style scoped lang="less">
   .calendar {
     font-size: 28px;
-    color: #333;
+    color: @brown;
   }
 </style>
