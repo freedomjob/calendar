@@ -1,5 +1,7 @@
 <template>
-  <div class="calendar">calendar</div>
+  <div>
+    <div class="calendar" @click="change">calendar</div>
+  </div>
 </template>
 
 <script>
@@ -7,7 +9,12 @@ export default {
   name: 'calendar',
   data () {
     return {
-
+      isShow: false
+    }
+  },
+  methods: {
+    change () {
+      this.isShow = !this.isShow
     }
   }
 }
