@@ -50,20 +50,21 @@ const calenderWeeks = () => {
       )
       // 计算总共多少行
       const rowCount = Math.ceil((currMonthDays + Math.abs(offsetOfPrevMonth)) / 7) + 1
+      // 日历选框起始日期
       const day = beginDay
 
       //将所有需要展示的日期组成数组
       for (let weekOfMonth = 0; weekOfMonth < rowCount; weekOfMonth++) {
         const week = []
         for (let i = 0; i < 7; i++) {
-          day.setDate(day.getDate() + 1)
-          week.push({
+          day.setDate(day.getDate() + 1) //由于时间计算的原因，需要加一才是正确的起始日期
+          week.push({ //每一行的日期
             year: day.getFullYear(),
             month: day.getMonth() + 1,
             date: day.getDate(),
           })
         }
-        dates.push(week)
+        dates.push(week) 将每一行加入到日期数组中
       }
       return dates
     }
