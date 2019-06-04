@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Calendar/>
+    <Calendar class="wrapper"/>
   </div>
 </template>
 
@@ -22,5 +22,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  margin-left: 200px;
 }
+
 </style>
