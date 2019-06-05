@@ -1,11 +1,25 @@
 # calendar
 this is a componet for calendar
 
+## 参数说明
+
+| 参数        | 说明                      | 类型      | 可选值  | 默认值    |
+| ---------  | ----------------------- | ------- | ---- | ------ |
+| value    | 日历框的值     | Date | -    | -   |
+| format | 展示的日期格式 | String | 'yyyy年MM月dd日', 'yyyy-MM-dd', 'yyyy/MM/dd' | 'yyyy年MM月dd日' |
+| placeholder    | 输入框默认文字     | String | -    | '请输入日历信息' |
+
+## 事件说明
+
+| 事件名        | 说明                  |  返回值  |
+| ---------  | ----------------------- | ---- | 
+| onChange    | 日期发生变化时触发     |  返回一个值，已经格式化后的日期   |
+
 ## 封装步骤
 - [ ] click-outside指令(方法) --[iview的实现](https://github.com/iview/iview/blob/2.0/src/directives/clickoutside.js) [element的实现](https://github.com/ElemeFE/element/blob/dev/src/utils/clickoutside.js) 实现点击日历选框外部时，关闭日历选框
 - [ ] input框 --readonly、placeholder、点击弹出日历选框、回显日期、日历图标和清除图标的切换
 - [ ] 日历选框上部的年月切换(+-月、+-年)
-- [ ] 日历选框下部的表格展示(要点一、二、三)、选择逻辑、在节点上放入年月日属性
+- [ ] 日历选框下部的表格展示(要点一、二、三)、选择逻辑
 
 
 ### 要点一：计算某年某月的总天数

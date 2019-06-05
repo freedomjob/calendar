@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Calendar class="wrapper"/>
+    <Calendar class="wrapper" v-model="currentDate" @onChange="changeDate" format="yyyy/MM/dd" placeholder="亲，输入个日期吧~"/>
   </div>
 </template>
 
@@ -10,6 +10,21 @@ export default {
   name: 'App',
   components: {
     Calendar
+  },
+  data () {
+    return {
+      currentDate: null
+    }
+  },
+  watch: {
+    currentDate (date) {
+      console.log('日期值', date)
+    }
+  },
+  methods: {
+    changeDate (dateLabel) {
+      console.log('格式化后的日期', dateLabel)
+    }
   }
 }
 </script>
@@ -21,8 +36,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
-  margin-left: 200px;
+  margin-top: 160px;
+  display: flex;
+  justify-content: center;
 }
 
 </style>
