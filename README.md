@@ -16,11 +16,12 @@ this is a componet for calendar
 | onChange    | 日期发生变化时触发     |  返回一个值，已经格式化后的日期   |
 
 ## 封装步骤
-- [ ] click-outside指令(方法) --[iview的实现](https://github.com/iview/iview/blob/2.0/src/directives/clickoutside.js) [element的实现](https://github.com/ElemeFE/element/blob/dev/src/utils/clickoutside.js) 实现点击日历选框外部时，关闭日历选框
-- [ ] input框 --readonly、placeholder、点击弹出日历选框、回显日期、日历图标和清除图标的切换
-- [ ] 日历选框上部的年月切换(+-月、+-年)
-- [ ] 日历选框下部的表格展示(要点一、二、三)、选择逻辑
-
+- [x] click-outside指令(方法) --[iview的实现](https://github.com/iview/iview/blob/2.0/src/directives/clickoutside.js) [element的实现](https://github.com/ElemeFE/element/blob/dev/src/utils/clickoutside.js) 实现点击日历选框外部时，关闭日历选框
+- [x] input框 --readonly、placeholder、点击弹出日历选框、回显日期、日历图标和清除图标的切换
+- [x] 日历选框上部的年月切换(+-月、+-年)
+- [x] 日历选框下部的表格展示(要点一、二、三)、选择逻辑
+- [ ] 日历的年和月份的表格展示 --待开发
+- [ ] 日历位置属性的完善和日历位置根据不同位置的动态改变 --待开发
 
 ### 要点一：计算某年某月的总天数
 
