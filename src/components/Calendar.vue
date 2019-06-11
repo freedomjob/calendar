@@ -7,12 +7,12 @@
       <div class="calendar-panel" v-show="showPanel">
         <div class="panel-header">
           <a href="#" class="prev-year" v-html="'<<'" @click="changeDate(-1,'year')"></a>
-          <a href="#" class="prev-month" v-html="'<'" @click="changeDate(-1,'month')"></a>
-          <span class="selected-year-month">{{`${currentDate.getFullYear()}年 ${currentDate.getMonth() + 1}月`}}</span>
+          <a href="#" class="prev-month" v-html="'<'" @click="changeDate(-1,'month')" v-show="mode=='day'"></a>
+          <span class="selected-year-month" @click="changeMode">{{`${currentDate.getFullYear()}年 ${currentDate.getMonth() + 1}月`}}</span>
+          <a href="#" class="next-month" v-html="'>'" @click="changeDate(1,'month')" v-show="mode=='day'"></a>
           <a href="#" class="next-year"  v-html="'>>'" @click="changeDate(1,'year')"></a>
-          <a href="#" class="next-month" v-html="'>'" @click="changeDate(1,'month')"></a>
         </div>
-        <table class="panel-body">
+        <table class="panel-body" v-show="mode === 'day'">
           <thead>
             <tr>
               <th v-for="(weekDay,weekInx) in weekDays" :key="weekInx">{{weekDay}}</th>
@@ -32,6 +32,20 @@
             </tr>
           </tbody>
         </table>
+        <div class="panel-body__other"  v-show="mode === 'year'">
+            <div v-for="(year,index) in calenderYears" :key="index" class="other-cell"
+              :class="{current:year === currentDate.getFullYear()}"
+             @click="selectedYear(year)">
+              {{year}}
+            </div>
+        </div>
+        <div class="panel-body__other"  v-show="mode === 'month'">
+            <div v-for="(month,index) in calenderMonths" :key="index" class="other-cell"
+            :class="{current:(month.slice(0, -1) - 1) === currentDate.getMonth()}"
+            @click="selectedMonth(month)">
+              {{month}}
+            </div>
+        </div>
       </div>
     </transition>
   </div>
@@ -57,6 +71,7 @@ export default {
   },
   data () {
     return {
+      mode: 'day',
       currentDate: '',
       currentDateLabel: '',
       showPanel: false,
@@ -94,6 +109,15 @@ export default {
         dates.push(week)
       }
       return dates
+    },
+    // 计算需要展示的年份数组
+    calenderYears () {
+      let year = String(this.currentDate.getFullYear()).slice(0, -1)
+      return Array.from({length: 10}).map((num, index) => +(year + index))
+    },
+    // 计算需要展示的月份数组
+    calenderMonths () {
+      return Array(12).fill().map((num, index) => `${index + 1}月`)
     }
   },
   methods: {
@@ -112,11 +136,22 @@ export default {
     changeDate (count, flag) {
       const newDate = new Date(this.currentDate)
       if (flag === 'year') {
+        (this.mode === 'year') && (count *= 10)
         newDate.setYear(this.currentDate.getFullYear() + count)
       } else {
         newDate.setMonth(this.currentDate.getMonth() + count)
       }
       this.currentDate = newDate
+    },
+    changeMode () {
+      if (this.mode === 'day') {
+        this.mode = 'year'
+      }
+      // else if (this.mode === 'year') {
+      //   this.mode = 'month'
+      // } else if (this.mode === 'month') {
+      //   this.mode = 'day'
+      // }
     },
     selectedDate (day) {
       let date = new Date()
@@ -128,6 +163,18 @@ export default {
       this.$emit('input', date)
       this.$emit('onChange', this.currentDateLabel)
       this.closePanel()
+    },
+    selectedYear (year) {
+      let date = new Date(this.currentDate)
+      date.setYear(year)
+      this.currentDate = date
+      this.mode = 'month'
+    },
+    selectedMonth (month) {
+      let date = new Date(this.currentDate)
+      date.setMonth(month.slice(0, -1) - 1)
+      this.currentDate = date
+      this.mode = 'day'
     },
     // 格式化日期
     formatDate (date) {
@@ -225,7 +272,9 @@ export default {
         }
       }
       .selected-year-month {
+        cursor: pointer;
         flex: 1;
+        margin: 0 44px;
       }
     }
     .panel-body {
@@ -254,6 +303,24 @@ export default {
             cursor: default;
             color: rgba(0,0,0,0.25);
             background: white;
+          }
+        }
+      }
+      &__other {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: space-around;
+        height: 250px;
+        .other-cell {
+          align-self: center;
+          justify-self: center;
+          padding: 10px;
+          transition: .2s linear;
+          cursor: pointer;
+          &:hover,&.current {
+            color: white;
+            background: @purple;
+            border-radius: 4px;
           }
         }
       }

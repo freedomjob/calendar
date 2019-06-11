@@ -20,7 +20,7 @@ this is a componet for calendar
 - [x] input框 --readonly、placeholder、点击弹出日历选框、回显日期、日历图标和清除图标的切换
 - [x] 日历选框上部的年月切换(+-月、+-年)
 - [x] 日历选框下部的表格展示(要点一、二、三)、选择逻辑
-- [ ] 日历的年和月份的表格展示 --待开发
+- [x] 日历的年和月份的表格展示(要点四、五)、日历选框上部年月切换调整
 - [ ] 日历位置属性的完善和日历位置根据不同位置的动态改变 --待开发
 
 ### 要点一：计算某年某月的总天数
@@ -84,5 +84,26 @@ const calenderWeeks = () => {
       return dates
     }
   }
+
+```
+
+### 要点四：计算需要展示的月份数组
+
+``` bash
+
+const calenderMonths = () => {
+    return Array(12).fill().map((num, index) => `${index + 1}月`)
+}
+
+```
+
+### 要点五：计算需要展示的年份数组
+
+``` bash
+
+const calenderYears = () => {
+    let year = String(this.currentDate.getFullYear()).slice(0, -1)
+    return Array.from({length: 10}).map((num, index) => +(year + index))
+}
 
 ```
