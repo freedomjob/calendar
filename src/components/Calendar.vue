@@ -147,11 +147,6 @@ export default {
       if (this.mode === 'day') {
         this.mode = 'year'
       }
-      // else if (this.mode === 'year') {
-      //   this.mode = 'month'
-      // } else if (this.mode === 'month') {
-      //   this.mode = 'day'
-      // }
     },
     selectedDate (day) {
       let date = new Date()
