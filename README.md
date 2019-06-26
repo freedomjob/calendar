@@ -112,7 +112,7 @@ const calenderYears = () => {
 
 ``` bash
 
-Date.prototype.format = (fmt) => {
+Date.prototype.format = function(fmt) {
 	
 	if (/(y+)/.test(fmt)) {
 		fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
