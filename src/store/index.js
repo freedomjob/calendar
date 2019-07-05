@@ -13,14 +13,17 @@ Vue.use(Vuex)
  * 若想让每个模块的以上内容不冲突，需要在各个模块加上namespaced属性为true
  * 此时，state和之前一样，getters取值方式变成了this.$store.getters['模块名/getter名'],
  * actions变成了this.$store.dispatch('模块名/action名',args),
- * mutations变成了this.$store.commit('模块名/mutation名',args)
+ * mutations变成了this.$store.commit('模块名/mutation名',args)。
+ * 此时getters/actions/mutations不加模块名会报错找不到。
  */
 
 // require.context 的应用
 let files = require.context('./modules',false,/\.js$/)
 let modules = {}
 files.keys().forEach(key => {
-    modules[key.replace(/(\.\/|\.js)/g,'')] = files(key).default
+    modules[key.replace(/(\.\/|\.js)/g,'')] = Object.assign({},files(key).default,{
+        namespaced: true,
+    })
 });
 const store = new Vuex.Store({
   modules
