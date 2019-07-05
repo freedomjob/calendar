@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Calendar class="wrapper" v-model="currentDate" @onChange="changeDate" format="yyyy-MM-dd" placeholder="亲，输入个日期吧~"/>
+    <Calendar class="wrapper" v-model="currentDate" @onChange="changeDate" format="yyyy/MM/dd" placeholder="亲，输入个日期吧~"/>
   </div>
 </template>
 

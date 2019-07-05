@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import clickOutside from '@/directives/clickOutside'
+require('@/utils/date')
 Vue.config.productionTip = false
 
 Vue.use(clickOutside)

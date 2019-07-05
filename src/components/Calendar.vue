@@ -173,15 +173,16 @@ export default {
     },
     // 格式化日期
     formatDate (date) {
-      let dateLabel = ''
-      if (this.format === 'yyyy-MM-dd') {
-        dateLabel = `${date.getFullYear()}-${this.pad(date.getMonth() + 1)}-${this.pad(date.getDate())}`
-      } else if (this.format === 'yyyy/MM/dd') {
-        dateLabel = `${date.getFullYear()}/${this.pad(date.getMonth() + 1)}/${this.pad(date.getDate())}`
-      } else {
-        dateLabel = `${date.getFullYear()}年 ${date.getMonth() + 1}月 ${date.getDate()}日`
-      }
-      return dateLabel
+      // let dateLabel = ''
+      // if (this.format === 'yyyy-MM-dd') {
+      //   dateLabel = `${date.getFullYear()}-${this.pad(date.getMonth() + 1)}-${this.pad(date.getDate())}`
+      // } else if (this.format === 'yyyy/MM/dd') {
+      //   dateLabel = `${date.getFullYear()}/${this.pad(date.getMonth() + 1)}/${this.pad(date.getDate())}`
+      // } else {
+      //   dateLabel = `${date.getFullYear()}年 ${date.getMonth() + 1}月 ${date.getDate()}日`
+      // }
+      // return dateLabel
+      return date.format(this.format)
     },
     pad (val) {
       val += ''
