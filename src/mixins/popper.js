@@ -3,7 +3,10 @@ export default {
     props: {
         placement: {
             type: String,
-            default: 'bottom-start'
+            default: 'bottom-start',
+            validator: function (value) {
+                return /^(auto|top|bottom|left|right)(-start|-end)?$/g.test(value)
+            }
         }
     },
     data () {
