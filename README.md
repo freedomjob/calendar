@@ -134,4 +134,31 @@ Date.prototype.format = function(fmt) {
 	
 };
 
+Date.prototype.addDays = function(d) {
+	this.setDate(this.getDate() + d);
+	return this;
+}
+
+Date.prototype.addWeeks = function(w) {
+	this.addDays(w * 7);
+	return this;
+}
+
+Date.prototype.addMonths = function (m) {
+	let d = this.getDate();
+	this.setMonth(this.getMonth() + m);
+	if (this.getDate() < d) {
+		this.setDate(0);
+	}
+	return this;
+}
+
+Date.prototype.addYears = function (y) {
+	let m = this.getMonth();
+	this.setFullYear(this.getFullYear() + y);
+	if (m < this.getMonth()) {
+		this.setDate(0);
+	}
+	return this;
+}
 ```
