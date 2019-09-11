@@ -1,16 +1,16 @@
 <template>
   <div class="calendar" v-click-outside="closePanel">
-    <input class="calendar-input" type="text" :placeholder="placeholder" readonly @click="openPanel" v-model="currentDateLabel">
+    <input class="calendar-input" type="text" :placeholder="placeholder" readonly @click="openPanel" v-model="currentDateLabel" ref="reference">
     <span class="icon-calendar" v-if="showCalendarIcon" @mouseover="currentDateLabel && (showCalendarIcon=false)"  @click="openPanel"></span>
     <span class="icon-close" v-if="!showCalendarIcon" @mouseout="showCalendarIcon=true" @click="clearDate"></span>
     <transition name="zoom-in-top">
-      <div class="calendar-panel" v-show="showPanel">
+      <div class="calendar-panel" v-show="showPanel" ref="popper">
         <div class="panel-header">
-          <a href="#" class="prev-year" v-html="'<<'" @click="changeDate(-1,'year')"></a>
-          <a href="#" class="prev-month" v-html="'<'" @click="changeDate(-1,'month')" v-show="mode=='day'"></a>
+          <a href="#" class="prev-year" v-html="'<<'" @click.prevent="changeDate(-1,'year')"></a>
+          <a href="#" class="prev-month" v-html="'<'" @click.prevent="changeDate(-1,'month')" v-show="mode=='day'"></a>
           <span class="selected-year-month" @click="changeMode">{{`${currentDate.getFullYear()}年 ${currentDate.getMonth() + 1}月`}}</span>
-          <a href="#" class="next-month" v-html="'>'" @click="changeDate(1,'month')" v-show="mode=='day'"></a>
-          <a href="#" class="next-year"  v-html="'>>'" @click="changeDate(1,'year')"></a>
+          <a href="#" class="next-month" v-html="'>'" @click.prevent="changeDate(1,'month')" v-show="mode=='day'"></a>
+          <a href="#" class="next-year"  v-html="'>>'" @click.prevent="changeDate(1,'year')"></a>
         </div>
         <table class="panel-body" v-show="mode === 'day'">
           <thead>
@@ -52,9 +52,11 @@
 </template>
 
 <script>
+import Popper from '@/mixins/popper.js'
 const START_OF_WEEK = 0 // week排列起始值
 export default {
   name: 'calendar',
+  mixins: [Popper],
   props: {
     value: Date,
     format: {
@@ -123,11 +125,14 @@ export default {
   methods: {
     openPanel () {
       this.showPanel = true
+      this.update()
     },
     closePanel () {
       this.showPanel = false
+      this.destroy()
     },
     clearDate () {
+      this.showPanel && this.closePanel()
       this.currentDateLabel = ''
       this.currentDate = new Date()
       this.$emit('input', null)
@@ -248,9 +253,9 @@ export default {
       width: 290px;
       height: 290px;
       box-shadow: rgba(0,0,0,0.15) 0 2px 8px 0;
-      position: absolute;
+      // position: absolute; 应用了popper.js后，就不需要此样式
       z-index: 999;
-      top: 35px;
+      // top: 35px;
       font-size: 14px;
     }
     .panel-header {
@@ -270,7 +275,7 @@ export default {
       .selected-year-month {
         cursor: pointer;
         flex: 1;
-        margin: 0 44px;
+        margin: 0 38px;
       }
     }
     .panel-body {

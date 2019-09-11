@@ -8,6 +8,7 @@ this is a componet for calendar
 | value    | 日历框的值     | Date | -    | -   |
 | format | 展示的日期格式 | String | 'yyyy年MM月dd日', 'yyyy-MM-dd', 'yyyy/MM/dd' | 'yyyy年MM月dd日' |
 | placeholder    | 输入框默认文字     | String | -    | '请输入日历信息' |
+| placement | 日历选框的位置 | String | auto/top/right/bottom/left [-start,-end] | 'bottom-start' |
 
 ## 事件说明
 
@@ -21,8 +22,7 @@ this is a componet for calendar
 - [x] 日历选框上部的年月切换(+-月、+-年)
 - [x] 日历选框下部的表格展示(要点一、二、三)、选择逻辑
 - [x] 日历的年和月份的表格展示(要点四、五)、日历选框上部年月切换调整
-- [ ] 日历位置属性的完善和日历位置根据不同位置的动态改变 --待开发 [资料1](https://www.cnblogs.com/kidsitcn/p/8987715.html) 
-[资料2](https://segmentfault.com/a/1190000014098739?utm_source=tag-newest)
+- [x] 日历位置属性的完善和日历位置根据不同位置的动态改变
 
 ### 要点一：计算某年某月的总天数
 

@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import store from '@/store'
+import router from '@/router'
 import clickOutside from '@/directives/clickOutside'
 require('@/utils/date')
 Vue.config.productionTip = false
@@ -12,6 +13,7 @@ Vue.use(clickOutside)
 new Vue({
   el: '#app',
   store,
+  router,
   components: { App },
   template: '<App/>'
 })
